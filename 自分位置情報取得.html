@@ -24,13 +24,13 @@
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
-      document.getElementById("latitude").textContent = "緯度: " + latitude;
-      document.getElementById("longitude").textContent = "経度: " + longitude;
+      document.getElementById("latitude").innerHTML = "緯度: " + latitude;
+      document.getElementById("longitude").innerHTML = "経度: " + longitude;
 
       setTimeout(getLocation, interval);
     }
 
-    getLocation();
+    getLocation(5000);
   </script>
 </body>
 </html>
