@@ -1,47 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<script>
-   // 位置情報を取得する間隔（ミリ秒単位）
-const interval = 5000; // 5秒ごと
-
-// 位置情報を取得する関数
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-}
-
-// 取得した位置情報を処理する関数
-function showPosition(position) {
-  const latitude = position.coords.latitude;
-  const longitude = position.coords.longitude;
-
-  console.log("Latitude: " + latitude);
-  console.log("Longitude: " + longitude);
-
-  // ここで取得した位置情報を利用する処理を実行する
-
-  // 指定した間隔で位置情報を再度取得する
-  setTimeout(getLocation, interval);
-}
-
-// 最初の位置情報の取得を開始する
-getLocation();
-
-  </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization&callback=initMap"></script>
-
+  <title>位置情報の表示</title>
 </head>
 <body>
+  <h1>位置情報の表示</h1>
 
-<button onclick="test()">test</button>
-<button onclick="clear()">clear</button>
+  <p id="latitude">緯度: </p>
+  <p id="longitude">経度: </p>
 
-<pre id="position_view"></pre>
+  <script>
+    const interval = 5000;
 
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      document.getElementById("latitude").textContent = "緯度: " + latitude;
+      document.getElementById("longitude").textContent = "経度: " + longitude;
+
+      setTimeout(getLocation, interval);
+    }
+
+    getLocation();
+  </script>
 </body>
 </html>
