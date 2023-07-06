@@ -10,7 +10,7 @@
   <p id="longitude">経度: </p>
 
   <script>
-    const interval = 5000;
+    const interval = 1000;
 
     function getLocation() {
       if (navigator.geolocation) {
@@ -30,7 +30,7 @@
       setTimeout(getLocation, interval);
     }
 
-    getLocation(5000);
+    getLocation(1000);
   </script>
 </body>
 </html>
