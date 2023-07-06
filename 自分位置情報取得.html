@@ -3,40 +3,35 @@
 <head>
 <meta charset="utf-8">
 <script>
-    var map;
-  
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 0, lng: 0},
-        zoom: 15
-      });
-  
-      // 位置情報を取得する関数
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(showPosition);
-        } else {
-          alert("Geolocation is not supported by this browser.");
-        }
-      }
-  
-      // 位置情報をマップ上に表示する関数
-      function showPosition(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-  
-        var marker = new google.maps.Marker({
-          position: {lat: latitude, lng: longitude},
-          map: map,
-          title: '現在位置'
-        });
-  
-        map.setCenter(marker.getPosition());
-      }
-  
-      // 位置情報の取得を開始
-      getLocation();
-    }
+   // 位置情報を取得する間隔（ミリ秒単位）
+const interval = 5000; // 5秒ごと
+
+// 位置情報を取得する関数
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+// 取得した位置情報を処理する関数
+function showPosition(position) {
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  console.log("Latitude: " + latitude);
+  console.log("Longitude: " + longitude);
+
+  // ここで取得した位置情報を利用する処理を実行する
+
+  // 指定した間隔で位置情報を再度取得する
+  setTimeout(getLocation, interval);
+}
+
+// 最初の位置情報の取得を開始する
+getLocation();
+
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=visualization&callback=initMap"></script>
 
