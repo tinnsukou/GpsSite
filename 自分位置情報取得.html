@@ -19,9 +19,26 @@
           alert("Geolocation is not supported by this browser.");
         }
       }
+  
+      // 位置情報をマップ上に表示する関数
+      function showPosition(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+  
+        var marker = new google.maps.Marker({
+          position: {lat: latitude, lng: longitude},
+          map: map,
+          title: '現在位置'
+        });
+  
+        map.setCenter(marker.getPosition());
+      }
+  
+      // 位置情報の取得を開始
+      getLocation();
     }
-    
-</script>
+  </script>
+  
 </head>
 <body>
 
