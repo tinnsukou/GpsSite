@@ -3,35 +3,24 @@
 <head>
 <meta charset="utf-8">
 <script>
-var num = 0;
-var watch_id;
-
-function test() {
-    watch_id = navigator.geolocation.watchPosition(test2, function(e) { alert(e.message); }, {"enableHighAccuracy": true, "timeout": 20000, "maximumAge": 2000});
-}
-
-function clear() {
-    navigator.geolocation.clearWatch(watch_id);
-}
-
-function test2(position) {
-
-    var geo_text = "緯度:" + position.coords.latitude + "\n";
-    geo_text += "経度:" + position.coords.longitude + "\n";
-    geo_text += "高度:" + position.coords.altitude + "\n";
-    geo_text += "位置精度:" + position.coords.accuracy + "\n";
-    geo_text += "高度精度:" + position.coords.altitudeAccuracy  + "\n";
-    geo_text += "移動方向:" + position.coords.heading + "\n";
-    geo_text += "速度:" + position.coords.speed + "\n";
-
-    var date = new Date(position.timestamp);
-
-    geo_text += "取得時刻:" + date.toLocaleString() + "\n";
-    geo_text += "取得回数:" + (++num) + "\n";
-
-    document.getElementById('position_view').innerHTML = geo_text;
-
-}
+    var map;
+  
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 0, lng: 0},
+        zoom: 15
+      });
+  
+      // 位置情報を取得する関数
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(showPosition);
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      }
+    }
+    
 </script>
 </head>
 <body>
